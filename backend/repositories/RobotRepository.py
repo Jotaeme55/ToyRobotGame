@@ -1,15 +1,14 @@
 import json
 import os
-from typing import Optional, Dict
-from models.Board import Board
-from models.Wall import Wall
+from typing import Optional
+from models.Robot import Robot
 from repositories.IRepository import IRepository
 
 
-class BoardRepository(IRepository):
-    """Repositorio para persistir el tablero del juego"""
+class RobotRepository(IRepository[Robot]):
+    """Repositorio para persistir el robot del juego"""
     
-    def __init__(self, db_path: str = "data/board.json"):
+    def __init__(self, db_path: str = "data/robot.json"):
         self.db_path = db_path
         self._ensure_db_exists()
     
@@ -20,36 +19,38 @@ class BoardRepository(IRepository):
             with open(self.db_path, 'w') as f:
                 json.dump(None, f)
     
-    def save(self, board: Board) -> None:
-        """Persiste el tablero"""
+    def save(self, robot: Robot) -> None:
+        """Persiste el robot"""
         data = {
-            "width": board.width,
-            "height": board.height,
-            "walls": [{"x": w.x, "y": w.y} for w in board.walls]
+            "x": robot.x,
+            "y": robot.y,
+            "facing": robot.facing
         }
         
         with open(self.db_path, 'w') as f:
             json.dump(data, f, indent=2)
     
-    def load(self) -> Optional[Board]:
-        """Carga el tablero desde la persistencia"""
+    def load(self) -> Optional[Robot]:
+        """Carga el robot desde la persistencia"""
         with open(self.db_path, 'r') as f:
             data = json.load(f)
         
         if data is None:
             return None
         
-        board = Board(data["width"], data["height"])
-        board.walls = [Wall(w["x"], w["y"]) for w in data["walls"]]
-        return board
+        robot = Robot()
+        robot.x = data["x"]
+        robot.y = data["y"]
+        robot.facing = data["facing"]
+        return robot
     
     def delete(self) -> None:
-        """Elimina el tablero persistido"""
+        """Elimina el robot persistido"""
         with open(self.db_path, 'w') as f:
             json.dump(None, f)
     
     def exists(self) -> bool:
-        """Verifica si existe un tablero persistido"""
+        """Verifica si existe un robot persistido"""
         with open(self.db_path, 'r') as f:
             data = json.load(f)
         return data is not None
