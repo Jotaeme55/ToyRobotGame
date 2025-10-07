@@ -7,7 +7,9 @@ from exceptions import (
     WallAlreadyExistsException,
     RobotNotPlacedException,
     WallCollisionException,
-    InvalidDirectionException
+    InvalidDirectionException,
+    RobotOutOfBoundsException
+
 )
 
 app = Flask(__name__)
@@ -69,6 +71,14 @@ def handle_robot_not_placed(e):
 
 @app.errorhandler(InvalidDirectionException)
 def handle_invalid_direction(e):
+    """Maneja direcciones inválidas"""
+    return jsonify({
+        'success': False,
+        'message': str(e)
+    }), 400
+
+@app.errorhandler(RobotOutOfBoundsException)
+def handle_robot_out_of_bounds(e):
     """Maneja direcciones inválidas"""
     return jsonify({
         'success': False,

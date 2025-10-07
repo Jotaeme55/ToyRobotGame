@@ -5,6 +5,7 @@ from services.BoardService import BoardService
 from exceptions import (
     RobotNotPlacedException,
     WallCollisionException,
+    RobotOutOfBoundsException
 )
 
 
@@ -27,12 +28,17 @@ class RobotService:
         board = self._board_service.get_board()
         if board is None:
             raise ValueError("No existe un tablero creado")
-        # Validar que la posición no tiene una pared
+        
         if board.has_wall_at(x, y):
             raise WallCollisionException(
                 f"No se puede colocar el robot en ({x}, {y}): hay una pared"
             )
         
+        if not board.is_inside(x, y):
+            raise RobotOutOfBoundsException(
+                f"El robot no puede estar fuera de los limites del tablero"
+            )
+
         # Obtener o crear robot
         robot = self._repository.load()
         if robot is None:
