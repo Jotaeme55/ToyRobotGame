@@ -6,7 +6,7 @@ class Board:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.walls: list[Wall] = []  # Corregido: debe ser lista vacía, no None
+        self.walls: list[Wall] = [] 
 
     def is_valid_position(self, x, y) -> bool:
         """Comprueba si la posicion esta dentro del tablero y si no tiene una pared"""
