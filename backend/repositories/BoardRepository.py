@@ -24,14 +24,12 @@ class BoardRepository(IRepository):
         data = {
             "width": board.width,
             "height": board.height,
-            "walls": [{"x": w.x, "y": w.y} for w in board.walls]
+            "walls": [{"x": wall.x, "y": wall.y} for wall in board.walls]  # ✅
         }
-        
         with open(self.db_path, 'w') as f:
             json.dump(data, f, indent=2)
     
     def load(self) -> Optional[Board]:
-        """Carga el tablero desde la persistencia"""
         with open(self.db_path, 'r') as f:
             data = json.load(f)
         
@@ -39,7 +37,11 @@ class BoardRepository(IRepository):
             return None
         
         board = Board(data["width"], data["height"])
-        board.walls = [Wall(w["x"], w["y"]) for w in data["walls"]]
+        
+        for wall_data in data.get("walls", []):
+            wall = Wall(wall_data["x"], wall_data["y"])
+            board.walls.append(wall)
+        
         return board
     
     def delete(self) -> None:

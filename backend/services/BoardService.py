@@ -25,8 +25,8 @@ class BoardService:
     
     def get_board(self) -> Optional[Board]:
         """Obtiene el tablero actual"""
-        if self._board is None:
-            self._board = self._repository.load()
+       
+        self._board = self._repository.load()
         return self._board
     
     def add_wall(self, wall: Wall) -> None:

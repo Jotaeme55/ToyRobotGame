@@ -55,6 +55,7 @@ class RobotService:
             WallCollisionException: Si hay una pared en la siguiente posición
         """
         board = self._board_service.get_board()
+        
         if board is None:
             raise ValueError("No existe un tablero creado")
         
@@ -64,11 +65,17 @@ class RobotService:
         
         # Calcular siguiente posición
         next_x, next_y = robot.get_next_position()
-        
+
+        # print("="*20)
+        # print(next_x, next_y)
+
+
         # Aplicar wrap around (teleport a través de los bordes)
         next_x = self._wrap_coordinate(next_x, board.width)
         next_y = self._wrap_coordinate(next_y, board.height)
         
+        print(board.has_wall_at(next_x, next_y))
+
         # Validar que no hay pared
         if board.has_wall_at(next_x, next_y):
             raise WallCollisionException(

@@ -23,6 +23,13 @@
           @game-reset="handleReset"
         />
 
+        <!-- Controles del robot -->
+        <RobotControls
+          :robotPlaced="robotData?.success"
+          :boardExists="boardData?.success"
+          @robot-action="loadGameState"
+        />
+
 
         <!-- Estado del Robot -->
         <div v-if="robotData?.success" class="robot-status">
@@ -45,8 +52,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import Board from './components/Board.vue'
-import GameSetup from './components/GameSetup.vue'
+import Board from './Components/Board.vue'
+import GameSetup from './Components/GameSetup.vue'
+import RobotControls from './Components/RobotControls.vue'
 import api from './services/api.js'
 
 
