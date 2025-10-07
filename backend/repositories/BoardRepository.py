@@ -21,7 +21,6 @@ class BoardRepository(IRepository):
                 json.dump(None, f)
     
     def save(self, board: Board) -> None:
-        """Persiste el tablero"""
         data = {
             "width": board.width,
             "height": board.height,

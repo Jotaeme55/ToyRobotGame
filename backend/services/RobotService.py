@@ -27,7 +27,6 @@ class RobotService:
         board = self._board_service.get_board()
         if board is None:
             raise ValueError("No existe un tablero creado")
-        
         # Validar que la posición no tiene una pared
         if board.has_wall_at(x, y):
             raise WallCollisionException(

@@ -2,6 +2,10 @@ from repositories.BoardRepository import BoardRepository
 from models.Board import Board
 from models.Wall import Wall
 from typing import Optional, Dict
+from exceptions import (
+    WallOutOfBoundsException,
+    WallAlreadyExistsException,
+)
 
 class BoardService:
     def __init__(self, repository: BoardRepository):
@@ -25,16 +29,16 @@ class BoardService:
             self._board = self._repository.load()
         return self._board
     
-    def add_wall(self, wall: Wall) -> bool:
-        """Añade una pared al tablero"""
+    def add_wall(self, wall: Wall) -> None:
+        """Añade una pared al tablero. Lanza excepciones si falla."""
         board = self.get_board()
         if board is None:
-            return False
+            raise ValueError("No hay tablero inicializado")
         
-        if board.add_wall(wall):
-            self._repository.save(board)
-            return True
-        return False
+        # ⬅️ Ya NO hay try-except, las excepciones suben automáticamente
+        board.add_wall(wall)  # Si falla aquí, la excepción sube hasta el error handler
+        self._repository.save(board)
+
     
     def clear_walls(self) -> bool:
         """Elimina todas las paredes"""

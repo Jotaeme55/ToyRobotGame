@@ -62,6 +62,7 @@ class BoardController:
         }), 200
     
     def add_wall(self):
+
         """Maneja POST /api/board/wall"""
         data = request.get_json()
         

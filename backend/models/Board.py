@@ -25,6 +25,7 @@ class Board:
     
     def has_wall_at(self, x, y) -> bool:
         """Verifica si hay una pared en la posición especificada"""
+
         return any(wall.x == x and wall.y == y for wall in self.walls)
     
     def add_wall(self, wall: Wall) -> None:
