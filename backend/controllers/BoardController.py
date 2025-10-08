@@ -1,14 +1,13 @@
 from flask import request, jsonify
 from services.BoardService import BoardService
-from repositories.BoardRepository import BoardRepository
 from models.Wall import Wall
 
 
 class BoardController:
     """Controlador HTTP para gestionar el tablero"""
     
-    def __init__(self):
-        self._board_service = BoardService(BoardRepository())
+    def __init__(self, board_service: BoardService):
+        self._board_service = board_service
     
     def create(self):
         """Maneja POST /api/board"""

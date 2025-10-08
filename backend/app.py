@@ -12,12 +12,30 @@ from exceptions import (
 
 )
 
+from repositories.BoardRepository import BoardRepository
+from repositories.RobotRepository import RobotRepository
+
+from services.BoardService import BoardService
+from services.RobotService import RobotService
+
+from controllers.BoardController import BoardController
+from controllers.RobotController import RobotController
+
 app = Flask(__name__)
 CORS(app)  # Permitir peticiones desde el frontend
 
-# Inicializar controladores
-board_controller = BoardController()
-robot_controller = RobotController()
+
+
+
+
+board_repo = BoardRepository()
+robot_repo = RobotRepository()
+
+# 2. Creas los servicios (les INYECTAS los repos)
+board_service = BoardService(board_repo)  # ← Inyección
+robot_service = RobotService(robot_repo, board_service)
+board_controller = BoardController(board_service)  # ← Inyección
+robot_controller = RobotController(robot_service)
 
 
 # ============================================================================

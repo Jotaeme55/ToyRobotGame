@@ -1,16 +1,12 @@
 from flask import request, jsonify
 from services.RobotService import RobotService
-from services.BoardService import BoardService
-from repositories.RobotRepository import RobotRepository
-from repositories.BoardRepository import BoardRepository
 
 
 class RobotController:
     """Controlador HTTP para gestionar el robot"""
     
-    def __init__(self):
-        board_service = BoardService(BoardRepository())
-        self._robot_service = RobotService(RobotRepository(), board_service)
+    def __init__(self, robot_service: RobotService):
+        self._robot_service = robot_service
     
     def place(self):
         """Maneja POST /api/robot/place"""

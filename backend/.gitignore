@@ -1,4 +1,42 @@
+# Entornos virtuales de Python
 /env1
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+
+
+# Datos y archivos locales
 /data/
-*.json
+*.db
+*.sqlite3
+
+# JSON de datos específicos (no configs)
+/data/*.json
+
+
+# Variables de entorno
+.env
+.env.local

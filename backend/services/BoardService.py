@@ -40,16 +40,6 @@ class BoardService:
         self._repository.save(board)
 
     
-    def clear_walls(self) -> bool:
-        """Elimina todas las paredes"""
-        board = self.get_board()
-        if board is None:
-            return False
-        
-        board.clear_walls() 
-        self._repository.save(board)
-        return True
-    
     def delete_board(self) -> bool:
         """Elimina el tablero"""
         self._board = None
