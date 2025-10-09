@@ -177,7 +177,7 @@ The frontend is built with **Vue 3** using the **Composition API** and follows a
 
 #### `GameSetup.vue` – Game Configuration
 
-- Create board with custom dimensions (3–10 width/height)
+- Create board with 5 x 5 default
 - Add walls to specific coordinates
 - Reset entire game (board + robot)
 - Input validation and error feedback
