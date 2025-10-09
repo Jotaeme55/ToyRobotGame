@@ -39,12 +39,14 @@
           type="number"
           placeholder="X"
           min="1"
+          class="input-number"
         />
         <input
           v-model.number="wallY"
           type="number"
           placeholder="Y"
           min="1"
+          class="input-number"
         />
       </div>
       <button
@@ -219,6 +221,10 @@ input {
   border-radius: 8px;
   font-size: 0.9rem;
   transition: border-color 0.2s;
+}
+
+.input-number {
+  width: 45%;
 }
 
 input:focus {

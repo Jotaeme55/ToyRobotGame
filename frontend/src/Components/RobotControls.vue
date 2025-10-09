@@ -12,6 +12,7 @@
           placeholder="X"
           min="1"
           :disabled="!boardExists"
+          class="input-number"
         />
         <input
           v-model.number="placeY"
@@ -19,6 +20,7 @@
           placeholder="Y"
           min="1"
           :disabled="!boardExists"
+          class="input-number"
         />
       </div>
       <select
@@ -258,6 +260,9 @@ input, select {
   border-radius: 8px;
   font-size: 0.9rem;
   transition: border-color 0.2s;
+}
+.input-number {
+  width: 45%;
 }
 
 input:focus, select:focus {
