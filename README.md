@@ -71,7 +71,7 @@ After completing the previous steps, you need to open two terminal windows:
 
 1. **Backend terminal**
 
-   Navigate to the backend folder, activate the virtual environment, and run:
+   Navigate to the backend folder, activate the virtual environment (same step as the prerequisites, venv\Scripts\activate on Windows...), and run:
    ```bash
    py app.py
    ```
